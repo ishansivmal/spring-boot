@@ -1,34 +1,142 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-    <title>
-        Restaurant
-    </title>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurant</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f1e9;          /* warm off-white – good for food sites */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
 
-    <body>
-        <h1>Welcome to our restaurant!</h1>
-        <p>We offer a variety of delicious dishes. Please explore our menu and enjoy your meal!</p>
+        h1 {
+            text-align: center;
+            color: #c0392b;                     /* nice red for restaurant feel */
+            margin-bottom: 10px;
+        }
 
-       <table border="1">
-           <tr>
-               <th>ID</th>
-               <th>Name</th>
-               <th>Location</th>
-               <th>Rating</th>
-               <th>cuisine</th>
-               <th>Action</th>
-           </tr>
+        p {
+            text-align: center;
+            color: #555;
+            font-size: 1.1em;
+        }
 
-           <tr th:each="restaurant : ${listRestaurants}">
-               <td th:text="${restaurant.id}"></td>
-               <td th:text="${restaurant.name}"></td>
-               <td th:text="${restaurant.location}"></td>
-               <td th:text="${restaurant.rating}"></td>
-               <td th:text="${restaurant.cuisine }">></td>
+        table {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
-               <td>
-                   <a th:href="@{'/edit/' + ${restaurant.id}}">Edit</a>
-                   <a th:href="@{'/delete/' + ${restaurant.id}}">Delete</a>
-               </td>
-           </tr>
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
 
-       </table>
+        th {
+            background: #c0392b;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            transition: background 0.2s;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fffaf5;          /* very light peach – food vibe */
+        }
+
+        tr:hover {
+            background-color: #ffe5d9;
+            cursor: pointer;
+        }
+
+        td a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 12px;
+            transition: color 0.2s;
+        }
+
+        td a:hover {
+            color: #c0392b;
+            text-decoration: underline;
+        }
+
+        /* Responsive – stacks on small screens */
+        @media screen and (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                position: absolute;
+                top: 14px;
+                left: 18px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                content: attr(data-label);
+                color: #c0392b;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to our restaurant!</h1>
+<p>We offer a variety of delicious dishes. Please explore our menu and enjoy your meal!</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Rating</th>
+        <th>Cuisine</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="restaurant : ${listRestaurants}">
+        <td th:text="${restaurant.id}"       data-label="ID"></td>
+        <td th:text="${restaurant.name}"     data-label="Name"></td>
+        <td th:text="${restaurant.location}" data-label="Location"></td>
+        <td th:text="${restaurant.rating}"   data-label="Rating"></td>
+        <td th:text="${restaurant.cuisine}"  data-label="Cuisine"></td>
+
+        <td data-label="Action">
+            <a th:href="@{'/edit/' + ${restaurant.id}}">Edit</a>
+            <a th:href="@{'/delete/' + ${restaurant.id}}">Delete</a>
+        </td>
+    </tr>
+</table>
 </body>
+</html>
