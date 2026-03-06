@@ -18,6 +18,7 @@ public class RestaurantService {
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
+
     public Restaurant getRestaurantById(Integer id) {
         return restaurantRepository.findById(id).orElse(null);
     }

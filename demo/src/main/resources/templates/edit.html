@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Edit restaurant</title>
+    <title>Edit Restaurant</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
-
 <body>
-    <h2>
-        Edit restaurant
-    </h2>
 
-<form th:action="@{/save}" th:abbr="" th:object="${restaurant}" method="post">
-    <input type="hidden"th:field="*{id}"/>
+<div class="form-container">
+    <h2>Edit Restaurant</h2>
 
-    <label>Name</label>
-    <input type="text"th:field="*{name}"/>
+    <form th:action="@{/save}" th:object="${restaurant}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
-    <label>Location</label>
-    <input type="text"th:field="*{location}"/>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
 
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" th:field="*{location}"/>
+        </div>
 
-</form>
+        <div class="form-group">
+            <label>Rating</label>
+            <input type="text" th:field="*{rating}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Cuisine</label>
+            <input type="text" th:field="*{cuisine}"/>
+        </div>
+
+        <button type="submit" class="btn-submit">Save</button>
+    </form>
+</div>
+
 </body>
-
-
-
 </html>
